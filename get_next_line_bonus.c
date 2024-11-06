@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 12:24:08 by ipersids          #+#    #+#             */
-/*   Updated: 2024/11/06 14:30:46 by ipersids         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:00:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static char	*join_safe(char *allocated_str, char *static_buf, char *nl);
 
 char	*get_next_line(int fd)
 {
-	static char buffer[OPEN_MAX][BUFFER_SIZE + 1];
-    char        *buf;
+	static char	buffer[OPEN_MAX][BUFFER_SIZE + 1];
+	char		*buf;
 	char		*nl;
 	char		*temp_buf;
 
 	if (fd == -1)
 		return (NULL);
-    buf = buffer[fd];
+	buf = buffer[fd];
 	nl = ft_strchr(buf, '\n');
 	if (nl != 0)
 		return (get_line_from_buffer(buf, nl));
@@ -110,4 +110,3 @@ static char	*join_safe(char *allocated_str, char *static_buf, char *nl)
 	}
 	return (res);
 }
-
