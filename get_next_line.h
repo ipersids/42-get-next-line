@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:30:42 by ipersids          #+#    #+#             */
-/*   Updated: 2024/11/05 13:58:16 by ipersids         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:08:49 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,11 @@
  *   a default value of 100, simulating `getline` behavior.
  */
 # ifdef BUFFER_SIZE
-#  if BUFFER_SIZE <= 0
+#  if BUFFER_SIZE <= 0 || BUFFER_SIZE >= UINT_MAX
 #   undef BUFFER_SIZE
+#   define BUFFER_SIZE 42
 #  endif
-#  if BUFFER_SIZE >= SIZE_MAX
-#   undef BUFFER_SIZE
-#  endif
-# endif
-
-# ifndef BUFFER_SIZE
+# else
 #  define BUFFER_SIZE 100
 # endif
 

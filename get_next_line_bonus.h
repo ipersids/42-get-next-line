@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 12:24:22 by ipersids          #+#    #+#             */
-/*   Updated: 2024/11/06 14:31:00 by ipersids         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:53:29 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>		// malloc(), free(), NULL macros
 # include <unistd.h>		// read(), sysconf(_SC_OPEN_MAX) = 1024
-# include <limits.h>		// Limits to manage BUFFER_SIZE, OPEN_MAX
+# include <limits.h>		// Limits to manage BUFFER_SIZE
 
 # ifndef OPEN_MAX
 #  define OPEN_MAX 1024
@@ -39,15 +39,11 @@
  *   a default value of 100, simulating `getline` behavior.
  */
 # ifdef BUFFER_SIZE
-#  if BUFFER_SIZE <= 0
+#  if BUFFER_SIZE <= 0 || BUFFER_SIZE >= UINT_MAX / OPEN_MAX
 #   undef BUFFER_SIZE
+#   define BUFFER_SIZE 42
 #  endif
-#  if BUFFER_SIZE >= SIZE_MAX
-#   undef BUFFER_SIZE
-#  endif
-# endif
-
-# ifndef BUFFER_SIZE
+# else
 #  define BUFFER_SIZE 100
 # endif
 
