@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 12:24:22 by ipersids          #+#    #+#             */
-/*   Updated: 2024/11/06 15:53:29 by ipersids         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:02:28 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@
  *   `get_next_line` from attempting to allocate an invalid (negative) 
  *   buffer size, which would disrupt program execution.
  * 
- * - If BUFFER_SIZE + 1 exceeds SIZE_MAX, it also undefines the macro to 
- *   avoid excessive memory allocation requests that could lead to 
- *   program instability or crashes.
+ * - If BUFFER_SIZE (+1) exceeds UINT_MAX / OPEN_MAX, it also undefines 
+ *   the macro to avoid huge memory allocation requests.
  * 
  * - If BUFFER_SIZE is undefined after these checks, it is defined with 
  *   a default value of 100, simulating `getline` behavior.
@@ -41,7 +40,7 @@
 # ifdef BUFFER_SIZE
 #  if BUFFER_SIZE <= 0 || BUFFER_SIZE >= UINT_MAX / OPEN_MAX
 #   undef BUFFER_SIZE
-#   define BUFFER_SIZE 42
+#   define BUFFER_SIZE 100
 #  endif
 # else
 #  define BUFFER_SIZE 100
