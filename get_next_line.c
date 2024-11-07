@@ -6,16 +6,41 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:43:11 by ipersids          #+#    #+#             */
-/*   Updated: 2024/11/05 13:53:28 by ipersids         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:12:11 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/* -------------------------- Function prototypes -------------------------- */
+
 static char	*get_line_from_buffer(char *buf, char *nl);
 static char	*get_line_from_stream(char *temp_buf, char *buf, int fd, char *nl);
 static char	*join_safe(char *allocated_str, char *static_buf, char *nl);
 
+/* ---------------------------- Implementation ----------------------------- */
+
+/**
+ * @brief Get the next line from the file descriptor.
+ * 
+ * The get_next_line() function reads the content of the file descriptor `fd` 
+ * one line at a time. Each call returns a string containing the next line 
+ * read, including the newline character `\n` if one is present. The function 
+ * manages subsequent calls to return each line in order from the file or 
+ * standard input.
+ * 
+ * @param fd The file descriptor to read from.
+ * 
+ * @return char* Pointer to the next line read, including the terminating `\n` 
+ * 				 character (if present).
+ *               NULL: If there is nothing more to read, or if an error occurs 
+ * 				 (such as an invalid file descriptor).
+ * 
+ * @note This function returns NULL if an error occurs or the end of the file 
+ * is reached. You must ensure to free the memory allocated for the returned 
+ * line after use. The behavior is undefined if the file being read changes 
+ * between calls or if the function is used to read binary files.
+ */
 char	*get_next_line(int fd)
 {
 	static char	buf[BUFFER_SIZE + 1];

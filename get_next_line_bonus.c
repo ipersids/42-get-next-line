@@ -6,16 +6,37 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 12:24:08 by ipersids          #+#    #+#             */
-/*   Updated: 2024/11/06 15:00:05 by ipersids         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:13:34 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
+/* --------------------- Support function prototypes ----------------------- */
+
 static char	*get_line_from_buffer(char *buf, char *nl);
 static char	*get_line_from_stream(char *temp_buf, char *buf, int fd, char *nl);
 static char	*join_safe(char *allocated_str, char *static_buf, char *nl);
 
+/* ---------------------------- Implementation ----------------------------- */
+
+/**
+ * @brief Get the next line from the file descriptor.
+ * 
+ * The get_next_line() function reads the content of the file descriptor `fd` 
+ * one line at a time. Each call returns a string containing the next line 
+ * read, including the newline character `\n` if one is present. The function 
+ * manages subsequent calls to return each line in order from the file or 
+ * standard input.
+ * 
+ * @param fd The file descriptor to read from.
+ * 
+ * @return char* Pointer to the next line read, including the terminating `\n` 
+ * 				 character (if present).
+ *               NULL: If there is nothing more to read, or if an error occurs 
+ * 				 (such as an invalid file descriptor).
+ * 
+ */
 char	*get_next_line(int fd)
 {
 	static char	buffer[OPEN_MAX][BUFFER_SIZE + 1];
