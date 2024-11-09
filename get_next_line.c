@@ -6,7 +6,7 @@
 /*   By: ipersids <ipersids@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:43:11 by ipersids          #+#    #+#             */
-/*   Updated: 2024/11/07 12:12:11 by ipersids         ###   ########.fr       */
+/*   Updated: 2024/11/09 16:27:05 by ipersids         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*get_next_line(int fd)
 	char		*nl;
 	char		*temp_buf;
 
-	if (fd == -1)
+	if (fd < 0)
 		return (NULL);
 	nl = ft_strchr(buf, '\n');
 	if (nl != 0)
